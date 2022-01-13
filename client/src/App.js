@@ -8,6 +8,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
 
 
 const httpLink = createHttpLink({
@@ -34,19 +35,21 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="App">
-          <header className="App-header">
-            <p>
-              Vaccine Tracker!
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          <StoreProvider>
+            <header className="App-header">
+              <p>
+                Vaccine Tracker!
+              </p>
+              <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn React
+              </a>
+            </header>
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
