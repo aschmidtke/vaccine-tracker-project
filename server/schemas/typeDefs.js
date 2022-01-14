@@ -3,8 +3,9 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
     type Dosage {
         _id: ID
+        userId: String
         name: String
-        date: Int
+        date: String
     }
 
     type User {
@@ -12,7 +13,7 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String
-        dateOfBirth: Int
+        dateOfBirth: String
         dosage: [Dosage]
     }
     
@@ -26,9 +27,9 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(firstName: String!, lastName: String!, email: String!, password: String! dateOfBirth: Int!): Auth
-        addVax(dosage: [ID]!): Dosage
-        updateUser(firstName: String, lastName: String, email: String, password: String, dateOfBirth: Int): User
+        addUser(firstName: String!, lastName: String!, email: String!, password: String! dateOfBirth: String!): Auth
+        addVax(name: String, date: String): User
+        updateUser(firstName: String, lastName: String, email: String, password: String, dateOfBirth: String): User
         login(email: String!, password: String!): Auth
     }
 `;

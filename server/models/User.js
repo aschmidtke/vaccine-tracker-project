@@ -26,7 +26,7 @@ const userSchema = new Schema({
         minlength: 8
     },
     dateOfBirth: {
-        type: Number,
+        type: Date,
         required: true
     },
     dosage: [Dosage.schema]

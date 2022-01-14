@@ -9,7 +9,7 @@ const dosageSchema = new Schema({
         trim: true
     },
     date: {
-        type: Number,
+        type: Date,
         required: true
     }
 });

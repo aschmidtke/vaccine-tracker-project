@@ -20,14 +20,13 @@ const resolvers = {
 
             return { token, user}
         },
-        addVax: async (parent, { vaccines }, context) => {
+        addVax: async (parent, args, context) => {
             console.log(context);
             if (context.user) {
-                const dosage = new Dosage({ vaccines }); //vaccines? does this need to be in tDs?
+                // args.date = new Date(args.date)
+                const user = await User.findByIdAndUpdate(context.user._id, { $push: { dosage: args }});
 
-                await User.findByIdAndUpdate(context.user._id, { $push: { dosage: dosage }});
-
-                return dosage;
+                return user;
             }
             throw new AuthenticationError('Not logged in');
         },
