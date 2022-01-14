@@ -1,4 +1,33 @@
+//import from npm packages
 import './App.css';
+<<<<<<< HEAD
+import { BrowserRouter as
+  Router,
+  Route,
+  Switch } from 'react-router-dom';
+
+//import path specific 
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import Navbar from './components/Navbar/Navbar';
+
+
+function App() {
+  return (
+    <div className="App">
+    <Router>
+  
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/profile" component={Profile} />
+      </Switch>
+    </Router>
+    </div>
+=======
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
@@ -53,6 +82,7 @@ function App() {
         </div>
       </Router>
     </ApolloProvider>
+>>>>>>> 5e351abd5da25ac467e38daa392a7fa79211c455
   );
 }
 
