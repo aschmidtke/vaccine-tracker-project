@@ -1,100 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
 
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import { EntryPage, PageHeader } from './style';
+import EntryCard from '../components/EntryCard';
+import InputGroup from '../components/InputGroup';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
-function Signup(props) {
-    const [formState, setFormState] = useState({ email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
-  
-    const handleFormSubmit = async (event) => {
-      event.preventDefault();
-      const mutationResponse = await addUser({
-        variables: {
-          firstName: formState.firstName,
-          lastName: formState.lastName,
-          birthday: formState.birthday,
-          email: formState.email,
-          password: formState.password,
-        },
-      });
-      const token = mutationResponse.data.addUser.token;
-      Auth.login(token);
-    };
-  
-    const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormState({
-        ...formState,
-        [name]: value,
-      });
-    };
-  
-    return (
-      <div className="container my-1">
-        <Link to="/login">← Go to Login</Link>
-  
+const Signup = () => {
+
+
+  return (
+    <EntryPage>
+      <PageHeader to="/">Vaccine-Tracker</PageHeader>
+      <EntryCard>
         <h2>Signup</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              placeholder="First"
-              name="firstName"
-              type="firstName"
-              id="firstName"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              placeholder="Last"
-              name="lastName"
-              type="lastName"
-              id="lastName"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="birthday">Birthday:</label>
-            <input
-              placeholder="dateOfBirth"
-              name="birthday"
-              type="birthday"
-              id="birthday"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="email">Email:</label>
-            <input
-              placeholder="youremail@test.com"
-              name="email"
-              type="email"
-              id="email"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="pwd">Password:</label>
-            <input
-              placeholder="******"
-              name="password"
-              type="password"
-              id="pwd"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row flex-end">
-            <button type="submit">Submit</button>
-          </div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <InputGroup>
+            <label htmlFor="firstName">First Name</label>
+            <Input type="text" placeholder="First Name" id="firstName" />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="lastName">Last Name</label>
+            <Input type="text" placeholder="Last Name" id="lastName" />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="dateOfBirth">Birthday</label>
+            <Input type="date" placeholder="mm/dd/yyyy" id="dateOfBirth" />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="email">Email</label>
+            <Input type="text" placeholder="Email" id="email" />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="password">Password</label>
+            <Input type="text" placeholder="Password" id="password" />
+          </InputGroup>
+          <Button type="submit" full>Signup</Button>
         </form>
-      </div>
-    );
-  }
-  
-  export default Signup;
-  
+        <span>
+          Already have an account?  Click on
+          <Link to="/login"> Login</Link>
+        </span>
+
+      </EntryCard>
+    </EntryPage>
+  )
+}
+export default Signup;
