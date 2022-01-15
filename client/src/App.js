@@ -1,47 +1,33 @@
 //import from npm packages
 import './App.css';
-<<<<<<< HEAD
-import { BrowserRouter as
-  Router,
+import React from 'react';
+import {
+  BrowserRouter as
+    Router,
   Route,
-  Switch } from 'react-router-dom';
+  Switch
+} from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink
+} from '@apollo/client';
+
+import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
+
+
 
 //import path specific 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import Navbar from './components/Navbar/Navbar';
-
-
-function App() {
-  return (
-    <div className="App">
-    <Router>
-  
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/profile" component={Profile} />
-      </Switch>
-    </Router>
-    </div>
-=======
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { StoreProvider } from './utils/GlobalState';
 
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: '/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -59,30 +45,23 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Router>
           <StoreProvider>
-            <header className="App-header">
-              <p>
-                Vaccine Tracker!
-              </p>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </header>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/profile" component={Profile} />
+            </Switch>
           </StoreProvider>
-        </div>
-      </Router>
+        </Router>
+      </div>
     </ApolloProvider>
->>>>>>> 5e351abd5da25ac467e38daa392a7fa79211c455
   );
 }
 
