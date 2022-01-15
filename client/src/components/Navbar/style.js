@@ -21,12 +21,6 @@ export const NavItemLink = styled(Link)`
         border-radius: 4px;
         background-color: #2f8bfd;
         transition: background-color 0.2s;
-        &:hover { background-color: #0072ff;}
+        &:hover { background-color: #0072ff; }
     `};
-`;
-
-export const NavIconLink = styled(Link)`
-    color: red;
-    fontsize: 40px;
-    text-align: left;
 `;

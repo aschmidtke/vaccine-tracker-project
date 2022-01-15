@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+
+import Auth from '../utils/auth';
+import { ADD_USER } from '../utils/mutations';
 
 import { EntryPage, PageHeader } from './style';
 import EntryCard from '../components/EntryCard';
@@ -8,33 +12,93 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 const Signup = () => {
+  const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: '',
+    password: ''
+    });
+  const [addUser] = useMutation(ADD_USER);
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const mutationResponse = await addUser({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        dateOfBirth: formState.dateOfBirth
+      }
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    })
+  }
 
   return (
     <EntryPage>
       <PageHeader to="/">Vaccine-Tracker</PageHeader>
       <EntryCard>
         <h2>Signup</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handleFormSubmit}>
           <InputGroup>
             <label htmlFor="firstName">First Name</label>
-            <Input type="text" placeholder="First Name" id="firstName" />
+            <Input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              id="firstName"
+              onChange={handleChange}
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="lastName">Last Name</label>
-            <Input type="text" placeholder="Last Name" id="lastName" />
+            <Input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              id="lastName"
+              onChange={handleChange}
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="dateOfBirth">Birthday</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateOfBirth" />
+            <Input
+              type="date"
+              placeholder="mm/dd/yyyy"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              onChange={handleChange}
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="email">Email</label>
-            <Input type="text" placeholder="Email" id="email" />
+            <Input
+              type="text"
+              placeholder="Email"
+              name="email"
+              id="email"
+              onChange={handleChange}
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="password">Password</label>
-            <Input type="text" placeholder="Password" id="password" />
+            <Input 
+              type="text"
+              placeholder="Password"
+              name="password"
+              id="password"
+              onChange={handleChange}
+            />
           </InputGroup>
           <Button type="submit" full>Signup</Button>
         </form>

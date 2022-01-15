@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-   
-=======
->>>>>>> 5e351abd5da25ac467e38daa392a7fa79211c455
 import decode from 'jwt-decode';
 
 class AuthService {
