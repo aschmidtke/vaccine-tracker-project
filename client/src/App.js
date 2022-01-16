@@ -1,10 +1,12 @@
 //import from npm packages
 import './App.css';
 import React from 'react';
-import { BrowserRouter as
-  Router,
+import {
+  BrowserRouter as
+    Router,
   Route,
-  Switch } from 'react-router-dom';
+  Switch
+} from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -12,10 +14,11 @@ import {
   createHttpLink
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { StoreProvider } from './utils/GlobalState'
 
 
 //import path specific 
+import { StoreProvider } from './utils/GlobalState'
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -29,10 +32,10 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
-  return{
+  return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}`: '',
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
@@ -45,19 +48,21 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <div className="App">
-    <Router>
-      <StoreProvider>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/Login" component={Login} />
-        <Route exact path="/Signup" component={Signup} />
-        <Route exact path="/Profile" component={Profile} />
-        <Route exact path="/Vaccine" component={Vaccine} />
-      </Switch>
-      </StoreProvider>
-    </Router>
-    </div>
+      <div className="App">
+        <Router>
+          <div>
+            <StoreProvider>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/Login" component={Login} />
+                <Route exact path="/Signup" component={Signup} />
+                <Route exact path="/Profile" component={Profile} />
+                <Route exact path="/Vaccine" component={Vaccine} />
+              </Switch>
+            </StoreProvider>
+          </div>
+        </Router>
+      </div>
     </ApolloProvider>
   );
 }

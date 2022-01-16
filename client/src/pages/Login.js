@@ -32,6 +32,7 @@ const Login = (props) => {
             });
             const token = mutationResponse.data.login.token;
             Auth.login(token);
+            window.location.href='/Profile?email=' +formState.email;
         } catch (error) {
             console.log(error);
         }

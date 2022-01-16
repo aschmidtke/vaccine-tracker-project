@@ -17,7 +17,7 @@ export const ADD_USER = gql`
         $lastName: String!
         $email: String!
         $password: String!
-        $dateOfBirth: Integer!
+        $dateOfBirth: String!
     ) {
         addUser(
             firstName: $firstName
