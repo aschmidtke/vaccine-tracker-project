@@ -17,7 +17,7 @@ export const ADD_USER = gql`
         $lastName: String!
         $email: String!
         $password: String!
-        $dateOfBirth: Integer!
+        $dateOfBirth: String!
     ) {
         addUser(
             firstName: $firstName
@@ -35,7 +35,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_VAX = gql`
-    mutation addVax($type: String! $date: Integer!) {
+    mutation addVax($type: String! $date: String!) {
         addVax(type: $type date: $date) {
             dosage {
                 _id
