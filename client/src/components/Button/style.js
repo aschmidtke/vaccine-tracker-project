@@ -5,6 +5,7 @@ width: ${props => props.full ? '25%' : null};
 min-width: 64px;
 border: 0;
 border-radius: 4px;
+margin-bottom: 20px;
 padding: 8px 16px;
 outline: none;
 background-color: #2f8bfd;
