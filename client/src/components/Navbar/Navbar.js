@@ -10,12 +10,9 @@ import {
 function Navbar({ children }) {
     return (
         <StyledNavbar>
-            {/* <NavIconLink>
-                <BiClinic/>
-            </NavIconLink> */}
             <NavItemLink to="/Login">Login</NavItemLink>
             <NavItemLink to="/Signup">Signup</NavItemLink>
-            <NavItemLink to="/Profile">Update-Profile</NavItemLink>
+            <NavItemLink to="/Profile">Update Contact Info</NavItemLink>
         </StyledNavbar>
     );
 }

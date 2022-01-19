@@ -10,14 +10,18 @@ import InputGroup from '../components/InputGroup';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-// const Signup = () => {
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '', firstName: '', lastName: '', dateOfBirth: ''});
-  const [addUser] = useMutation(ADD_USER)
+const Signup = () => {
+  const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: '',
+    password: ''
+    });
+  const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    
     const mutationResponse = await addUser({
       variables: {
         email: formState.email,
@@ -27,21 +31,17 @@ function Signup(props) {
         dateOfBirth: formState.dateOfBirth
       }
     });
-    console.log(mutationResponse);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
 
   const handleChange = (event) => {
-    console.log(event)
-    const { id, value } = event.target;
+    const { name, value } = event.target;
     setFormState({
       ...formState,
-      [id]: value
-    });
-  };
-
- 
+      [name]: value,
+    })
+  }
 
   return (
     <EntryPage>
@@ -51,21 +51,53 @@ function Signup(props) {
         <form onSubmit={handleFormSubmit}>
           <InputGroup>
             <label htmlFor="firstName">First Name</label>
-            <Input type="text" placeholder="First Name" id="firstName" onChange={handleChange}/>
-          
+            <Input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              id="firstName"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
             <label htmlFor="lastName">Last Name</label>
-            <Input type="text" placeholder="Last Name" id="lastName" onChange={handleChange}/>
-          
+            <Input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              id="lastName"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
             <label htmlFor="dateOfBirth">Birthday</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateOfBirth" onChange={handleChange}/>
-         
+            <Input
+              type="date"
+              placeholder="mm/dd/yyyy"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
             <label htmlFor="email">Email</label>
-            <Input type="text" placeholder="Email" id="email" onChange={handleChange}/>
-          
+            <Input
+              type="text"
+              placeholder="Email"
+              name="email"
+              id="email"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
             <label htmlFor="password">Password</label>
-            <Input type="text" placeholder="Password" id="password" onChange={handleChange}/>
-
-            
+            <Input 
+              type="text"
+              placeholder="Password"
+              name="password"
+              id="password"
+              onChange={handleChange}
+            />
           </InputGroup>
           <Button type="submit" full>Signup</Button>
         </form>

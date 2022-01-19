@@ -11,7 +11,8 @@ export const StyledEntryCard = styled.div`
     text-align: center;
     h2 {
         font-weight: 900;
-        margin-bottom: 50px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
     h3 {
         font-weight: 800;

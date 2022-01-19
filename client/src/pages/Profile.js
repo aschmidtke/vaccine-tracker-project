@@ -1,5 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { Link, useParams } from 'react-router-dom';
+//import { useMutation } from '@apollo/client';
+
+import { QUERY_USER } from '../utils/queries';
+import Auth from '../utils/auth';
+//import { UPDATE_USER } from '../utils/mutations';
 
 import { EntryPage, PageHeader } from './style';
 import EntryCard from '../components/EntryCard';
@@ -8,6 +14,15 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 const Profile = () => {
+  const params = useParams()
+  console.log("location: ", params);
+  const { data } = useQuery(QUERY_USER, {variables: {email:"EliManning@gmail.com"}});
+  let user;
+  console.log("DATA: ", data);
+  if (data) {
+    user = data.user;
+  }
+
 
   return (
     <EntryPage>
@@ -17,65 +32,57 @@ const Profile = () => {
         <form onSubmit={(e) => e.preventDefault()}>
           <InputGroup>
             <label htmlFor="firstName">First Name</label>
-            <Input type="text" placeholder="First Name" id="firstName" />
+            <Input
+              type="text"
+              value={"TST"}
+              name="firstName"
+              id="firstName"
+              
+              />
           </InputGroup>
           <InputGroup>
             <label htmlFor="lastName">Last Name</label>
-            <Input type="text" placeholder="Last Name" id="lastName" />
+            <Input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              id="lastName"
+              
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="dateOfBirth">Birthday</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateOfBirth" />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <Input type="integer" placeholder="(123)456-7890" id="phoneNumber" />
+            <Input
+              type="date"
+              placeholder="Birthday"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="email">Email</label>
-            <Input type="text" placeholder="Email" id="email" />
+            <Input
+              type="text"
+              placeholder="Email"
+              name="email"
+              id="email"
+              
+            />
           </InputGroup>
           <InputGroup>
             <label htmlFor="password">Password</label>
-            <Input type="text" placeholder="Password" id="password" />
+            <Input
+              type="text"
+              placeholder="password"
+              name="password"
+              id="password"
+            />
           </InputGroup>
           <br />
-          <h2>COVID-19 Vaccination Record Card</h2>
-          <InputGroup>
-            <h3 htmlFor="dosage1">Vaccine 1st Dosage</h3>
-            <Input type="text" placeholder="Product Name/Manufacture and Batch No." id="dosage1" />
-            <label htmlFor="dateFirstDosage">Date</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateFirstDosage" />
-            <label htmlFor="locationFirstDosage">Healthcare Professional or Clinic Site</label>
-            <Input type="text" placeholder="Location" id="locationFirstDosage" />
-          </InputGroup>
-          <br />          
-          <InputGroup>
-            <h3 htmlFor="dosage2">Vaccine 2nd Dosage</h3>
-            <Input type="text" placeholder="Product Name/Manufacture and Batch No." id="dosage2" />
-            <label htmlFor="dateSecondDosage">Date</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateSecondDosage" />
-            <label htmlFor="locationSecondDosage">Healthcare Professional or Clinic Site</label>
-            <Input type="text" placeholder="Location" id="locationSecondDosage" />
-          </InputGroup>
-          <br />
-          <InputGroup>
-            <h3 htmlFor="booster1">Vaccine 1st Booster</h3>
-            <Input type="text" placeholder="Product Name/Manufacture and Batch No." id="booster" />
-            <label htmlFor="dateFirstBooster">Date</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateFirstBooster" />
-            <label htmlFor="locationFirstBooster">Healthcare Professional or Clinic Site</label>
-            <Input type="text" placeholder="Location" id="locationFirstBooster" />
-          </InputGroup>  
-          <br />        
-          <InputGroup>
-            <h3 htmlFor="booster2">Vaccine 2nd Booster</h3>
-            <Input type="text" placeholder="Product Name/Manufacture and Batch No." id="booster2" />
-            <label htmlFor="dateSecondBooster">Date</label>
-            <Input type="date" placeholder="mm/dd/yyyy" id="dateSecondBooster" />
-            <label htmlFor="locationSecondBooster">Healthcare Professional or Clinic Site</label>
-            <Input type="text" placeholder="Location" id="locationSecondBooster" />
-          </InputGroup>
+          <h2>
+            <Link to="/vaccine">COVID-19 Vaccination Record Card</Link>
+          </h2>
         <Button type="submit" full>Update</Button>
         </form>
       </EntryCard>
