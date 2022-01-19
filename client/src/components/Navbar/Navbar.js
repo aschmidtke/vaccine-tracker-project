@@ -15,7 +15,8 @@ function Navbar({ children }) {
             {Auth.loggedIn()? (
                 <>
                 <Link to="/Profile">Update Contact Info</Link>
-                <a href="/">Logout</a>
+                <NavItemLink onClick={Auth.logout}>
+                    Logout</NavItemLink>
                 </>
             ):(
             <>
