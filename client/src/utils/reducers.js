@@ -12,16 +12,19 @@ export const reducer = (state, action) => {
 
         default:
             return state;
-
-        // case UPDATE_USER:
-        //     return {
-        //         ...state,
-        //         user: [...action.user]
-        //     };
-        // default:
-        //     return state;
     }
 };
+
+//route to get logged in user's info (needs token)
+export const getMe = (token) => {
+    return fetch('/api/users/me', {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
+  };
+  
 
 export function useProductReducer(initialState) {
     return useReducer(reducer, initialState);

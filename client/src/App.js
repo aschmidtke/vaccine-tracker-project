@@ -45,6 +45,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+//add 1-17 TC <Route exact path="/Profile/:email?" component={Profile} />
+// was <Route exact path="/Profile" component={Profile} />
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -56,7 +59,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/Login" component={Login} />
                 <Route exact path="/Signup" component={Signup} />
-                <Route exact path="/Profile" component={Profile} />
+                <Route exact path="/Profile/:email?" component={Profile} />
                 <Route exact path="/Vaccine" component={Vaccine} />
               </Switch>
             </StoreProvider>

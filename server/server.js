@@ -25,6 +25,11 @@ app.use(express.json());
 // static assets?
 // app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
+//add in but commented out 1-17 TC
+//if (process.env.NODE_ENV === 'production') {
+// app.use(express.static(path.join(__dirname, '../client/build)));
+// }
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
