@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Auth from '../utils/auth';
 
 
 import { EntryPage, PageHeader } from './style';

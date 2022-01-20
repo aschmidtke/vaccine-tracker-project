@@ -26,5 +26,5 @@ export const NavItemLink = styled(Link)`
 `;
 
 export const Logo = styled.h1`
-    padding: 30%
+    padding: 35%
 `
