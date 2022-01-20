@@ -11,7 +11,7 @@ module.exports = {
         if (req.headers.authorization) {
             token = token.split(' ').pop().trim();
         }
-
+        console.log(token);
         if (!token) {
             return req;
         }
@@ -19,15 +19,15 @@ module.exports = {
         try {
             const { data } = jwt.verify(token, secret, { maxAge: expiration });
             req.user = data;
-        } catch {
-            console.log('Invalid token');
+        } catch (error) {
+            console.log(error);
         }
 
         return req;
     },
-
-    signToken: function ({ firstName, email, _id }) {
-        const payload = { firstName, email, _id };
+    //removed firstName from variables listed ({ firstName, email, _id })
+    signToken: function ({ firstName, lastName, dateOfBirth, email, _id, shotOne, shotTwo, booster }) {
+        const payload = { firstName, lastName, dateOfBirth, email, _id, shotOne, shotTwo, booster };
 
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     }

@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/aschmidtke/vaccine-tracker-project#readme",
   "dependencies": {
-    "apollo-server-express": "^2.15.0"
+    "@apollo/client": "^3.5.7",
+    "apollo-server-express": "^2.15.0",
+    "dotenv": "^12.0.4",
+    "react-apollo": "^3.1.5"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"

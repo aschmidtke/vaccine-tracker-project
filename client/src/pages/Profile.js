@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
+import { QUERY_ME, QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
-
-
+import { UPDATE_USER } from '../utils/mutations';
+import { useParams } from 'react-router-dom';
 import { EntryPage, PageHeader } from './style';
 import EntryCard from '../components/EntryCard';
 import InputGroup from '../components/InputGroup';
@@ -13,7 +13,20 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar/Navbar';
 
-const Signup = () => {
+
+const Profile = () => {
+  
+  const { loading, data } = useQuery(QUERY_USER, {
+  });
+  
+  const user = data?.user || {};
+
+  const loggedIn = Auth.loggedIn();
+
+  const thisIsUser = Auth.getProfile();
+    console.log('this is my user: ----', thisIsUser);
+ 
+
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
@@ -24,11 +37,11 @@ const Signup = () => {
     shotTwo: '',
     booster: ''
     });
-  const [addUser] = useMutation(ADD_USER);
 
+  const [updateUser] = useMutation(UPDATE_USER);
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    const mutationResponse = await updateUser({
       variables: {
         email: formState.email,
         password: formState.password,
@@ -40,7 +53,7 @@ const Signup = () => {
         booster: formState.booster
       }
     });
-    const token = mutationResponse.data.addUser.token;
+    const token = mutationResponse.data.updateUser.token;
     Auth.login(token);
   };
 
@@ -52,17 +65,19 @@ const Signup = () => {
     })
   }
 
+
   return (
     <EntryPage>
       <Navbar></Navbar>
+      <PageHeader to="/">Vaccine-Tracker</PageHeader>
       <EntryCard>
-        <h2>Signup</h2>
+        <h2>Personal Information</h2>
         <form onSubmit={handleFormSubmit}>
           <InputGroup>
             <label htmlFor="firstName">First Name</label>
             <Input
               type="text"
-              placeholder="First Name"
+              value={thisIsUser.data.firstName}
               name="firstName"
               id="firstName"
               onChange={handleChange}
@@ -72,7 +87,7 @@ const Signup = () => {
             <label htmlFor="lastName">Last Name</label>
             <Input
               type="text"
-              placeholder="Last Name"
+              value={thisIsUser.data.lastName}
               name="lastName"
               id="lastName"
               onChange={handleChange}
@@ -82,7 +97,7 @@ const Signup = () => {
             <label htmlFor="dateOfBirth">Birthday</label>
             <Input
               type="text"
-              placeholder="mm/dd/yyyy"
+              value={thisIsUser.data.dateOfBirth}
               name="dateOfBirth"
               id="dateOfBirth"
               onChange={handleChange}
@@ -92,19 +107,9 @@ const Signup = () => {
             <label htmlFor="email">Email</label>
             <Input
               type="text"
-              placeholder="Email"
+              value={thisIsUser.data.email}
               name="email"
               id="email"
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="password">Password</label>
-            <Input 
-              type="text"
-              placeholder="Password"
-              name="password"
-              id="password"
               onChange={handleChange}
             />
           </InputGroup>
@@ -112,7 +117,7 @@ const Signup = () => {
             <label htmlFor="shotOne">First Dose</label>
             <Input
               type="text"
-              placeholder="First Dose"
+              value={thisIsUser.data.shotOne}
               name="shotOne"
               id="shotOne"
               onChange={handleChange}
@@ -122,7 +127,7 @@ const Signup = () => {
             <label htmlFor="shotTwo">Second Dose</label>
             <Input
               type="text"
-              placeholder="Second Dose"
+              value={thisIsUser.data.shotTwo}
               name="shotTwo"
               id="shotTwo"
               onChange={handleChange}
@@ -132,21 +137,18 @@ const Signup = () => {
             <label htmlFor="booster">Booster</label>
             <Input
               type="text"
-              placeholder="Booster"
+              value={thisIsUser.data.booster}
               name="booster"
               id="booster"
               onChange={handleChange}
             />
           </InputGroup>
-          <Button type="submit" full>Signup</Button>
+          <br />
+         
         </form>
-        <span>
-          Already have an account?  Click on
-          <Link to="/login"> Login</Link>
-        </span>
-
       </EntryCard>
+      
     </EntryPage>
   )
 }
-export default Signup;
+export default Profile;

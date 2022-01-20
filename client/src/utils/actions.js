@@ -1,1 +1,2 @@
 export const UPDATE_DOSAGE = "UPDATE_DOSAGE";
+export const UPDATE_USER = "UPDATE_USER";
