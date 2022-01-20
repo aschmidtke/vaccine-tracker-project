@@ -11,17 +11,17 @@ import Button from '../components/Button';
 import Auth from '../utils/auth';
 import { LOGIN } from '../utils/mutations';
 //add 1-17 TC
-import { QUERY_ME } from '../utils/queries';
+//import { QUERY_ME } from '../utils/queries';
 
 const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: ''});
 
     const [login, { error }] = useMutation(LOGIN);
-
+    
     //add 1-17 TC
-    const loggedIn = Auth.loggedIn();
+   
 
-
+   
 
 
 
@@ -37,10 +37,13 @@ const Login = (props) => {
         event.preventDefault();
         try{
             const mutationResponse = await login({
-                variables: {email: formState.email, password: formState.password }
+                variables: { email: formState.email, password: formState.password }
             });
             const token = mutationResponse.data.login.token;
             Auth.login(token);
+            console.log('this is my--- ', token);
+            
+            
         } catch (error) {
             console.log(error);
         }

@@ -26,8 +26,8 @@ module.exports = {
         return req;
     },
     //removed firstName from variables listed ({ firstName, email, _id })
-    signToken: function ({ email, _id }) {
-        const payload = { email, _id };
+    signToken: function ({ firstName, lastName, dateOfBirth, email, _id }) {
+        const payload = { firstName, lastName, dateOfBirth, email, _id };
 
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     }

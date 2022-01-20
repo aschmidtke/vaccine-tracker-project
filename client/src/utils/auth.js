@@ -1,8 +1,11 @@
 import decode from 'jwt-decode';
+//import { User } from '../../../server/models';
 
 class AuthService {
     getProfile() {
+        // const thisIsUser = decode(this.getToken());
         return decode(this.getToken());
+        // return thisIsUser;
     }
 
     loggedIn() {
@@ -27,8 +30,8 @@ class AuthService {
 
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-
-        window.location.assign('/');
+        
+        window.location.assign('/profile');
     }
 
     logout() {

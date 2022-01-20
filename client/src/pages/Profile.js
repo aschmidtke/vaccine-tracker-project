@@ -19,16 +19,17 @@ import Button from '../components/Button';
 
 const Profile = () => {
   //add 1-17 TC
-  const { email: useParam } = useParams();
+  //const { email: useParam } = useParams();
   const { loading, data } = useQuery(QUERY_USER, {
-    variables: { email: useParam }
   });
   //add 1-17 TC
   const user = data?.user || {};
   //add 1-17 TC
-  const { data: userData } = useQuery(QUERY_ME)
+  //const { data: userData } = useQuery(QUERY_ME)
   const loggedIn = Auth.loggedIn();
 
+  const thisIsUser = Auth.getProfile();
+    console.log('this is my user: ----', thisIsUser);
  
 
   const [formState, setFormState] = useState({
@@ -63,19 +64,21 @@ const Profile = () => {
     })
   }
 
+  
+
   // add 1-17 TC
-  const { id: userId } = useParams();
-  console.log("userID: ", userId);
-  console.log('First Name: ', user.firstName);
+  //const { id: userId } = useParams();
+  //console.log("userID: ", userId);
+  //console.log('First Name: ', user.firstName);
   //add 1-17 TC
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  //if (loading) {
+  //  return <div>Loading...</div>
+  //}
 
   return (
     <EntryPage>
       <PageHeader to="/">Vaccine-Tracker</PageHeader>
-      {loggedIn && userData ? (
+      
       <EntryCard>
         <h2>Personal Information</h2>
         <form onSubmit={handleFormSubmit}>
@@ -83,7 +86,7 @@ const Profile = () => {
             <label htmlFor="firstName">First Name</label>
             <Input
               type="text"
-              value={userData.me.firstName}
+              value={thisIsUser.data.firstName}
               name="firstName"
               id="firstName"
               onChange={handleChange}
@@ -93,7 +96,7 @@ const Profile = () => {
             <label htmlFor="lastName">Last Name</label>
             <Input
               type="text"
-              value={userData.me.lastName}
+              value={thisIsUser.data.lastName}
               name="lastName"
               id="lastName"
               onChange={handleChange}
@@ -103,7 +106,7 @@ const Profile = () => {
             <label htmlFor="dateOfBirth">Birthday</label>
             <Input
               type="date"
-              value={userData.me.dateOfBirth}
+              value={thisIsUser.data.dateOfBirth}
               name="dateOfBirth"
               id="dateOfBirth"
               onChange={handleChange}
@@ -113,19 +116,10 @@ const Profile = () => {
             <label htmlFor="email">Email</label>
             <Input
               type="text"
-              value={userData.me.email}
+              value={thisIsUser.data.email}
               name="email"
               id="email"
               onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="password">Password</label>
-            <Input
-              type="text"
-              value={userData.me.password}
-              name="password"
-              id="password"
             />
           </InputGroup>
           <br />
@@ -135,7 +129,7 @@ const Profile = () => {
           <Button type="submit" full>Update</Button>
         </form>
       </EntryCard>
-      ): null}
+      
     </EntryPage>
   )
 }
