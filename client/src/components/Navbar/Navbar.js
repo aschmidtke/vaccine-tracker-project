@@ -14,8 +14,11 @@ function Navbar({ children }) {
         <StyledNavbar>
             {Auth.loggedIn()? (
                 <>
-                <NavItemLink to="/Profile">Update Contact Info</NavItemLink>
-                <NavItemLink href="/">Logout</NavItemLink>
+
+                <Link to="/Profile">Update Contact Info</Link>
+                <NavItemLink onClick={Auth.logout}>
+                    Logout</NavItemLink>
+
                 </>
             ):(
             <>
