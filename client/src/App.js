@@ -17,7 +17,7 @@ import { setContext } from '@apollo/client/link/context';
 
 
 //import path specific 
-import { StoreProvider } from './utils/GlobalState'
+import { StoreProvider } from './utils/GlobalState';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -25,6 +25,8 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Vaccine from './pages/Vaccine';
 //import Navbar from './components/Navbar/Navbar';
+
+
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -48,9 +50,14 @@ const client = new ApolloClient({
 
 //add 1-17 TC <Route exact path="/Profile/:email?" component={Profile} />
 // was <Route exact path="/Profile" component={Profile} />
+
+
 function App() {
+
+
   return (
     <ApolloProvider client={client}>
+     
       <div className="App">
         <Router>
           <div>
@@ -59,13 +66,14 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/Login" component={Login} />
                 <Route exact path="/Signup" component={Signup} />
-                <Route exact path="/Profile/:email?" component={Profile} />
+                <Route exact path="/Profile" component={Profile} />
                 <Route exact path="/Vaccine" component={Vaccine} />
               </Switch>
             </StoreProvider>
           </div>
         </Router>
       </div>
+      
     </ApolloProvider>
   );
 }
