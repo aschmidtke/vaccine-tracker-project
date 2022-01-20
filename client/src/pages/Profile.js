@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { QUERY_ME, QUERY_USER } from '../utils/queries';
+import { useMutation } from '@apollo/client'
+
+import {  QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
 import { UPDATE_USER } from '../utils/mutations';
-import { useParams } from 'react-router-dom';
+
 import { EntryPage, PageHeader } from './style';
+
 import EntryCard from '../components/EntryCard';
 import InputGroup from '../components/InputGroup';
 import Input from '../components/Input';
-import Button from '../components/Button';
 import Navbar from '../components/Navbar/Navbar';
 
 

@@ -14,7 +14,8 @@ function Navbar({ children }) {
     return (
         <StyledNavbar>
             <Logo>
-                Vaccine Tracker
+                <NavItemLink to="/">Vaccine Tracker</NavItemLink>
+                
             </Logo>
             {Auth.loggedIn()? (
                 <>

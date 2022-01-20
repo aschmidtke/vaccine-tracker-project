@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { EntryPage, PageHeader } from './style';
+import { EntryPage }  from './style';
+
 import EntryCard from '../components/EntryCard';
 import InputGroup from '../components/InputGroup';
 import Input from '../components/Input';
@@ -11,19 +12,13 @@ import Navbar from '../components/Navbar/Navbar';
 
 import Auth from '../utils/auth';
 import { LOGIN } from '../utils/mutations';
-//add 1-17 TC
-//import { QUERY_ME } from '../utils/queries';
+
 
 const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
 
     const [login, { error }] = useMutation(LOGIN);
-
-    //add 1-17 TC
-
-
-
-
+    console.log(error)
 
 
     const handleChange = (event) => {
