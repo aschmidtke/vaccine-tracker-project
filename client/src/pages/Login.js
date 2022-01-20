@@ -7,6 +7,7 @@ import EntryCard from '../components/EntryCard';
 import InputGroup from '../components/InputGroup';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Navbar from '../components/Navbar/Navbar';
 
 import Auth from '../utils/auth';
 import { LOGIN } from '../utils/mutations';
@@ -14,14 +15,14 @@ import { LOGIN } from '../utils/mutations';
 //import { QUERY_ME } from '../utils/queries';
 
 const Login = (props) => {
-    const [formState, setFormState] = useState({ email: '', password: ''});
+    const [formState, setFormState] = useState({ email: '', password: '' });
 
     const [login, { error }] = useMutation(LOGIN);
-    
-    //add 1-17 TC
-   
 
-   
+    //add 1-17 TC
+
+
+
 
 
 
@@ -35,15 +36,15 @@ const Login = (props) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        try{
+        try {
             const mutationResponse = await login({
                 variables: { email: formState.email, password: formState.password }
             });
             const token = mutationResponse.data.login.token;
             Auth.login(token);
             console.log('this is my--- ', token);
-            
-            
+
+
         } catch (error) {
             console.log(error);
         }
@@ -52,29 +53,30 @@ const Login = (props) => {
     //(e) => e.preventDefault()
 
     return (
+
         <EntryPage>
-            <PageHeader to="/">Vaccine-Tracker</PageHeader>
+            <Navbar></Navbar>
             <EntryCard>
                 <h2>Login</h2>
                 <form onSubmit={handleFormSubmit}>
                     <InputGroup>
                         <label htmlFor="email">Email Address</label>
-                        <Input 
-                        type="text" 
-                        placeholder="Please enter your email" 
-                        id="email"
-                        name="email"
-                        onChange={handleChange}
+                        <Input
+                            type="text"
+                            placeholder="Please enter your email"
+                            id="email"
+                            name="email"
+                            onChange={handleChange}
                         />
                     </InputGroup>
                     <InputGroup>
                         <label htmlFor="password">Password</label>
-                        <Input 
-                        type="password" 
-                        placeholder="Please enter your password" 
-                        id="password"
-                        name="password"
-                        onChange={handleChange}
+                        <Input
+                            type="password"
+                            placeholder="Please enter your password"
+                            id="password"
+                            name="password"
+                            onChange={handleChange}
                         />
                     </InputGroup>
                     <Button type="submit" full>Login</Button>

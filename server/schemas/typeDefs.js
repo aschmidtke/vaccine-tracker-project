@@ -16,6 +16,9 @@ const typeDefs = gql`
         lastName: String
         firstName: String
         dateOfBirth: String
+        shotOne: String
+        shotTwo: String
+        booster: String
         dosage: [Dosage]
     }
     
@@ -32,7 +35,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(firstName: String!, lastName: String!, email: String!, password: String! dateOfBirth: String!): Auth
+        addUser(firstName: String!, lastName: String!, email: String!, password: String! dateOfBirth: String! shotOne: String shotTwo: String booster: String): Auth
         addVax(name: String, date: String): User
         updateUser(firstName: String, lastName: String, email: String, password: String, dateOfBirth: String): User
         login(email: String!, password: String!): Auth

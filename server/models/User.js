@@ -29,6 +29,15 @@ const userSchema = new Schema({
         type: Date,
         required: true
     },
+    shotOne: {
+        type: String
+    },
+    shotTwo: {
+        type: String
+    },
+    booster: {
+        type: String
+    },
     dosage: [Dosage.schema]
 });
 

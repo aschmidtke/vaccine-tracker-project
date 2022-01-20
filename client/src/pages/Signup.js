@@ -10,6 +10,7 @@ import EntryCard from '../components/EntryCard';
 import InputGroup from '../components/InputGroup';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Navbar from '../components/Navbar/Navbar';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -17,7 +18,10 @@ const Signup = () => {
     lastName: '',
     dateOfBirth: '',
     email: '',
-    password: ''
+    password: '',
+    shotOne: '',
+    shotTwo: '',
+    booster: ''
     });
   const [addUser] = useMutation(ADD_USER);
 
@@ -29,7 +33,10 @@ const Signup = () => {
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
-        dateOfBirth: formState.dateOfBirth
+        dateOfBirth: formState.dateOfBirth,
+        shotOne: formState.shotOne,
+        shotTwo: formState.shotTwo,
+        booster: formState.booster
       }
     });
     const token = mutationResponse.data.addUser.token;
@@ -46,7 +53,7 @@ const Signup = () => {
 
   return (
     <EntryPage>
-      <PageHeader to="/">Vaccine-Tracker</PageHeader>
+      <Navbar></Navbar>
       <EntryCard>
         <h2>Signup</h2>
         <form onSubmit={handleFormSubmit}>
@@ -73,7 +80,7 @@ const Signup = () => {
           <InputGroup>
             <label htmlFor="dateOfBirth">Birthday</label>
             <Input
-              type="date"
+              type="text"
               placeholder="mm/dd/yyyy"
               name="dateOfBirth"
               id="dateOfBirth"
@@ -97,6 +104,36 @@ const Signup = () => {
               placeholder="Password"
               name="password"
               id="password"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="shotOne">First Dose</label>
+            <Input
+              type="text"
+              placeholder="First Dose"
+              name="shotOne"
+              id="shotOne"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="shotTwo">Second Dose</label>
+            <Input
+              type="text"
+              placeholder="Second Dose"
+              name="shotTwo"
+              id="shotTwo"
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="booster">Booster</label>
+            <Input
+              type="text"
+              placeholder="Booster"
+              name="booster"
+              id="booster"
               onChange={handleChange}
             />
           </InputGroup>

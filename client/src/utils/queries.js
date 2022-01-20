@@ -8,6 +8,9 @@ export const QUERY_USER = gql`
             lastName
             email
             dateOfBirth
+            shotOne
+            shotTwo
+            booster
             dosage {
                 type
                 date
@@ -25,6 +28,9 @@ export const QUERY_ME = gql`
         lastName
         email
         dateOfBirth
+        shotOne
+        shotTwo
+        booster
         dosage{
             type
             date   

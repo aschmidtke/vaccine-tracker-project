@@ -3,11 +3,13 @@ import React from 'react';
 //import { useQuery } from '@apollo/client';
 //import { QUERY_USERS } from '../utils/queries;
 
+
 import Navbar from '../components/Navbar';
 
 const Home = () => {
     return(
-            <Navbar /> 
+            <Navbar />
+            
     );
 
 }

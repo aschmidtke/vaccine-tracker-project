@@ -14,6 +14,9 @@ export const LOGIN = gql`
         firstName
         lastName
         dateOfBirth
+        shotOne
+        shotTwo
+        booster
       }
     }
   }
@@ -26,6 +29,9 @@ export const ADD_USER = gql`
         $email: String!
         $password: String!
         $dateOfBirth: String!
+        $shotOne: String!
+        $shotTwo: String!
+        $booster: String!
     ) {
         addUser(
             firstName: $firstName
@@ -33,6 +39,9 @@ export const ADD_USER = gql`
             email: $email
             password: $password
             dateOfBirth: $dateOfBirth
+            shotOne: $shotOne
+            shotTwo: $shotTwo
+            booster: $booster
         ) {
             token
             user {
@@ -62,7 +71,10 @@ export const UPDATE_USER = gql`
         $lastName: String!
         $email: String!
         $password: String!
-        $dateOfBirth: Integer!
+        $dateOfBirth: String!
+        $shotOne: String!
+        $shotTwo: String!
+        $booster: String!
     ) {
         updateUser(
             firstName: $firstName
@@ -70,6 +82,9 @@ export const UPDATE_USER = gql`
             email: $email
             password: $password
             dateOfBirth: $dateOfBirth
+            shotOne: $shotOne
+            shotTwo: $shotTwo
+            booster: $booster
         ) {
             token
             user {

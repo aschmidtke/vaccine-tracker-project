@@ -24,3 +24,7 @@ export const NavItemLink = styled(Link)`
         &:hover { background-color: #0072ff; }
     `};
 `;
+
+export const Logo = styled.h1`
+    padding: 30%
+`

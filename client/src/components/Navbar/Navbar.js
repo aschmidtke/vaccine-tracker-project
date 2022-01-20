@@ -7,15 +7,19 @@ import Auth from '../../utils/auth';
 import {
     StyledNavbar, 
     NavItemLink,
+    Logo
 } from './style';
 
 function Navbar({ children }) {
     return (
         <StyledNavbar>
+            <Logo>
+                Vaccine Tracker
+            </Logo>
             {Auth.loggedIn()? (
                 <>
 
-                <Link to="/Profile">Update Contact Info</Link>
+                <Link to="/Profile">Profile</Link>
                 <NavItemLink onClick={Auth.logout}>
                     Logout</NavItemLink>
 
@@ -24,7 +28,6 @@ function Navbar({ children }) {
             <>
             <NavItemLink to="/Login">Login</NavItemLink>
             <NavItemLink to="/Signup">Signup</NavItemLink>
-            <NavItemLink to="/Profile">Update Contact Info</NavItemLink>
             </>
             )}
         </StyledNavbar>
